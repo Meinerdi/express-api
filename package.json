@@ -1,0 +1,21 @@
+{
+  "name": "simple-api",
+  "version": "1.0.0",
+  "description": "simple-api",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node dist/main.js",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "tslog": "^4.9.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/express": "^5.0.0",
+    "prettier": "^3.4.2"
+  },
+  "private": true
+}
