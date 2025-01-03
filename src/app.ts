@@ -1,29 +1,34 @@
 import express, { Express } from "express";
 import { Server } from "http";
 
-import { usersRouter } from "./users/users";
 import { LoggerService } from "./logger/logger.service";
+import { UserController } from "./users/users.controller";
 
 export class App {
   server: Server;
   app: Express;
   port: number;
   logger: LoggerService;
+  userController: UserController;
 
-  constructor(logger: LoggerService) {
+  constructor(logger: LoggerService, userController: UserController) {
     this.app = express();
     this.port = 8000;
-    this.logger = logger
+    this.logger = logger;
+    this.userController = userController;
   }
 
   useRoutes() {
-    this.app.use("/users", usersRouter);
+    this.app.use("/users", this.userController.router);
   }
+
+  useExceptionFilters() {}
 
   public async init() {
     this.useRoutes();
+    this.useExceptionFilters();
     this.server = this.app.listen(this.port, () => {
-      this.logger.log(`Server is running on port: ${this.port}`)
+      this.logger.log(`Server is running on port: ${this.port}`);
     });
   }
 }
