@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "express": "^4.21.2",
+    "inversify": "^6.2.1",
+    "reflect-metadata": "^0.2.2",
     "tslog": "^4.9.3"
   },
   "devDependencies": {
-    "typescript": "^5.7.2",
     "@types/express": "^5.0.0",
-    "prettier": "^3.4.2"
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2"
   },
   "private": true
 }

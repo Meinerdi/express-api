@@ -1,28 +1,37 @@
 import express, { Express } from "express";
 import { Server } from "http";
 
-import { LoggerService } from "./logger/logger.service";
 import { UserController } from "./users/users.controller";
+import { ExceptionFilter } from "./errors/exceptionFilter";
+import { ILogger } from "./logger/logger.interface";
 
 export class App {
   server: Server;
   app: Express;
   port: number;
-  logger: LoggerService;
+  logger: ILogger;
   userController: UserController;
+  exceptionFilter: ExceptionFilter;
 
-  constructor(logger: LoggerService, userController: UserController) {
+  constructor(
+    logger: ILogger,
+    userController: UserController,
+    exceptionFilter: ExceptionFilter,
+  ) {
     this.app = express();
     this.port = 8000;
     this.logger = logger;
     this.userController = userController;
+    this.exceptionFilter = exceptionFilter;
   }
 
   useRoutes() {
     this.app.use("/users", this.userController.router);
   }
 
-  useExceptionFilters() {}
+  useExceptionFilters() {
+    this.app.use(this.exceptionFilter.catch.bind(this.exceptionFilter));
+  }
 
   public async init() {
     this.useRoutes();

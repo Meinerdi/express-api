@@ -1,6 +1,10 @@
+import { injectable } from "inversify";
 import { Logger } from "tslog";
 
-export class LoggerService {
+import { ILogger } from "./logger.interface";
+
+@injectable()
+export class LoggerService implements ILogger {
   public logger: Logger<any>;
 
   constructor() {
@@ -13,7 +17,7 @@ export class LoggerService {
 
   error(...args: unknown[]) {
     this.logger.error(...args);
-  } 
+  }
 
   warn(...args: unknown[]) {
     this.logger.warn(...args);
