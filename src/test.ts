@@ -1,19 +1,19 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 
 function Inject(key: string) {
-  return (target: Function) => {
-    Reflect.defineMetadata(key, 1, target);
-    const meta = Reflect.getMetadata(key, target);
-  };
+	return (target: Function) => {
+		Reflect.defineMetadata(key, 1, target);
+		const meta = Reflect.getMetadata(key, target);
+	};
 }
 
-function Prop(target: Object, name: string) {
-  Reflect.defineMetadata(name, 123, target);
+function Prop(target: object, name: string) {
+	Reflect.defineMetadata(name, 123, target);
 }
 
-@Inject("tes")
+@Inject('tes')
 export class C {
-  @Prop prop: number;
+	@Prop prop: number;
 }
 
 console.log(new C().prop);
