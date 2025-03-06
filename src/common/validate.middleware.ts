@@ -13,6 +13,8 @@ export class ValidateMiddleware implements IMiddleware {
 
 		if (errors.length > 0) {
 			return res.status(422).send(errors);
+		} else {
+			next();
 		}
 	}
 }
