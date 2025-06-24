@@ -8,11 +8,13 @@
     "start": "node dist/main.js",
     "dev": "nodemon",
     "dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9222  -r ts-node/register src/main.ts",
+    "generate" : "prisma generate",
     "lint": "eslint ./src/**",
     "lint:fix": "eslint ./src/** --fix",
     "build": "tsc"
   },
   "dependencies": {
+    "@prisma/client": "^3.3.0",
     "bcryptjs": "^3.0.2",
     "body-parser": "^1.20.3",
     "class-transformer": "^0.5.1",
@@ -33,7 +35,7 @@
     "eslint-plugin-prettier": "^5.2.3",
     "nodemon": "^3.1.9",
     "prettier": "^3.5.1",
-    "prisma": "^6.10.1",
+    "prisma": "^3.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   },
