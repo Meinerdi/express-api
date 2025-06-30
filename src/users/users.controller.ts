@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import { inject, injectable } from 'inversify';
+import { sign } from 'jsonwebtoken';
 
+import { inject, injectable } from 'inversify';
 import { TYPES } from '../types';
 import { ILogger } from '../logger/logger.interface';
 import { IUserController } from './users.controller.interface';
@@ -11,7 +12,7 @@ import { UserLoginDto } from './dto/user-login.dto';
 import { UserRegisterDto } from './dto/user-register.dto';
 import { HTTPError } from '../errors/httpError.class';
 import { ValidateMiddleware } from '../common/validate.middleware';
-import { sign } from 'jsonwebtoken';
+import { AuthGuard } from '../common/auth.guard';
 
 @injectable()
 export class UserController extends BaseController implements IUserController {
@@ -38,6 +39,7 @@ export class UserController extends BaseController implements IUserController {
 				path: '/info',
 				method: 'get',
 				func: this.info,
+				middlewares: [new AuthGuard()],
 			},
 		]);
 	}
@@ -68,7 +70,8 @@ export class UserController extends BaseController implements IUserController {
 	}
 
 	async info({ user }: Request, res: Response, next: NextFunction): Promise<void> {
-		this.ok(res, { email: user });
+		const userInfo = await this.userService.getUserInfo((user as { email: string }).email);
+		this.ok(res, { email: userInfo?.email, id: userInfo?.name });
 	}
 
 	private signJWT(email: string, secret: string): Promise<string> {

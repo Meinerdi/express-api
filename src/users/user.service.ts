@@ -38,4 +38,10 @@ export class UserService implements IUserService {
 
 		return await newUser.comparePasswords(password);
 	}
+
+	async getUserInfo(email: string): Promise<UserModel | null> {
+		const userData = this.usersRepository.find(email);
+
+		return userData;
+	}
 }
