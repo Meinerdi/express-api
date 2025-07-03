@@ -59,6 +59,21 @@ simple-api/
   - ESLint and Prettier for code quality
   - Nodemon for development hot-reloading
 
+## Testing
+
+The project includes both unit tests and end-to-end tests:
+
+- **Unit Tests**:
+  - Test individual components in isolation
+  - Mock dependencies for controlled testing
+  - Run with `npm test`
+
+- **End-to-End Tests**:
+  - Test the API endpoints from a client perspective
+  - Verify the entire request-response cycle
+  - Use SuperTest for HTTP assertions
+  - Run with `npm run test:e2e`
+
 ## Installation
 
 1. Clone the repository:
@@ -104,7 +119,7 @@ simple-api/
 - **GET /users/info**
   - Get user information (requires authentication)
   - Headers: `Authorization: Bearer token`
-  - Response: `{ "email": "user@example.com", "id": "User Name" }`
+  - Response: `{ "email": "user@example.com", "id": 1, "name": "User Name" }`
 
 ## Configuration
 
@@ -116,6 +131,8 @@ The application uses environment variables for configuration:
 - `npm start`: Start the production server
 - `npm run dev`: Start the development server with hot-reloading
 - `npm run build`: Build the TypeScript code
+- `npm run test`: Run unit tests
+- `npm run test:e2e`: Run end-to-end tests with coverage
 - `npm run lint`: Run ESLint
 - `npm run lint:fix`: Run ESLint with auto-fix
 - `npm run generate`: Generate Prisma client
