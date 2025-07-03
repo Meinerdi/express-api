@@ -1,4 +1,4 @@
-# Simple API
+# Simple Express API
 
 A lightweight, TypeScript-based RESTful API with user authentication and management capabilities.
 
